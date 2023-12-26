@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  stocks-web:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./public:/usr/src/app/public
+    command: sh -c "sleep 2 && npm run dev"
+    environment:
+      - DATABASE_URL=mongodb://rootuser:rootpass@localhost:27017/stocks?authSource=admin
+  mongo:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rootuser
+      MONGO_INITDB_ROOT_PASSWORD: rootpass
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
