@@ -11,15 +11,15 @@ model Stock {
   id                    String   @id @default(auto()) @map("_id") @db.ObjectId
   name                  String
   type                  StockType
-  average_price         Float
-  total_quantity        Int
-  actual_total          Float
-  actual_investment     Float
-  actual_profit         Float
-  actual_profit_percent Float
+  average_price         Float     @default(0)
+  total_quantity        Int       @default(0)
+  actual_total          Float     @default(0)
+  actual_investment     Float     @default(0)
+  actual_profit         Float     @default(0)
+  actual_profit_percent Float     @default(0)
   orders                Order[]
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 }
 
 model Order {
