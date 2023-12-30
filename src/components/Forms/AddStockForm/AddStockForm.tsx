@@ -18,11 +18,11 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { create } from '@/db/stocks/stocks.actions'
 import { StockType } from '@/db/stocks/stocks.type'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { create } from './actions'
 
 export const formSchema = z.object({
   name: z.string().min(2).max(50),

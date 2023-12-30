@@ -10,7 +10,7 @@ services:
       - ./public:/usr/src/app/public
     command: sh -c "sleep 2 && npm run dev"
     environment:
-      - DATABASE_URL=mongodb://rootuser:rootpass@localhost:27017/stocks?authSource=admin
+      - MONGODB_URI=mongodb://rootuser:rootpass@mongo:27017/stocks?authSource=admin
   mongo:
     image: mongo
     container_name: mongodb
