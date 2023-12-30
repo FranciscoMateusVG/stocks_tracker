@@ -1,21 +1,15 @@
 'use server'
-import prisma from './db'
 
-export async function create() {
-  prisma.stock
-    .create({
-      data: {
-        name: 'test',
-        type: 'acaoCapital'
-      }
-    })
-    .then((result) => {
-      console.log(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(async () => {
-      await prisma.$disconnect()
-    })
+import dbConnect from '@/db/connection'
+import { StockDocument } from '@/db/stocks/stock.document'
+import Stock from '@/db/stocks/stocks.schema'
+import { z } from 'zod'
+import { formSchema } from './form'
+
+export async function create(values: z.infer<typeof formSchema>) {
+  await dbConnect()
+
+  const stock = new StockDocument(values.name, values.type)
+  const teste = await Stock.create(stock)
+  console.log(teste)
 }
